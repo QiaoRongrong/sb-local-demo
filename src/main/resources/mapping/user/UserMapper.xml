@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.sblocaldemo.mapper.user.UserMapper">
+  <resultMap id="BaseResultMap" type="com.yf.sblocaldemo.domain.user.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="loginPwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="avatarImg" jdbcType="VARCHAR" property="avatarImg" />
+    <result column="loginpwdModifyTime" jdbcType="TIMESTAMP" property="loginpwdModifyTime" />
+    <result column="registTime" jdbcType="TIMESTAMP" property="registTime" />
+    <result column="registerClient" jdbcType="VARCHAR" property="registerClient" />
+    <result column="invitationCode" jdbcType="VARCHAR" property="invitationCode" />
+    <result column="channelId" jdbcType="BIGINT" property="channelId" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="loginTime" />
+  </resultMap>
+</mapper>

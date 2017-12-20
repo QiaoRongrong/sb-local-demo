@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.sblocaldemo.mapper.common.AppRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.yf.sblocaldemo.domain.common.AppRecommend">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="descpt" jdbcType="VARCHAR" property="descpt" />
+    <result column="downloadUrl" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="iconDownloadUrl" jdbcType="VARCHAR" property="iconDownloadUrl" />
+    <result column="developer" jdbcType="VARCHAR" property="developer" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="scoreTimes" jdbcType="INTEGER" property="scoreTimes" />
+    <result column="downloadCount" jdbcType="INTEGER" property="downloadCount" />
+    <result column="realDownloadCount" jdbcType="INTEGER" property="realDownloadCount" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="slogan" jdbcType="VARCHAR" property="slogan" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="supportedPltf" jdbcType="VARCHAR" property="supportedPltf" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="sysUserId" jdbcType="INTEGER" property="sysUserId" />
+    <result column="updTime" jdbcType="TIMESTAMP" property="updTime" />
+  </resultMap>
+
+
+    <select id="getList" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        SELECT *
+        FROM app_recommend
+        <where>
+            AND status = 0
+        </where>
+        ORDER BY updTime DESC
+        limit #{offset}, #{limit}
+    </select>
+
+
+</mapper>

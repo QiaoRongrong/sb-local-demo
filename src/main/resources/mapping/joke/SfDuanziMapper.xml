@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.sblocaldemo.mapper.joke.SfDuanziMapper">
+  <resultMap id="BaseResultMap" type="com.yf.sblocaldemo.domain.joke.SfDuanzi">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="smallImage" jdbcType="VARCHAR" property="smallImage" />
+    <result column="bigImage" jdbcType="VARCHAR" property="bigImage" />
+    <result column="jid" jdbcType="BIGINT" property="jid" />
+    <result column="good" jdbcType="BIGINT" property="good" />
+    <result column="bad" jdbcType="BIGINT" property="bad" />
+    <result column="shareCount" jdbcType="BIGINT" property="shareCount" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="userAddTime" jdbcType="TIMESTAMP" property="userAddTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+
+      <result column="mediaType" jdbcType="VARCHAR" property="mediaType" />
+      <result column="labelName" jdbcType="VARCHAR" property="labelName" />
+      <result column="labelId" jdbcType="INTEGER" property="labelId" />
+
+  </resultMap>
+
+    <select id="getDuanziList" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        SELECT *
+        FROM sf_duanzi
+        <where>
+            AND status = 0
+            <if test="mediaType != null and mediaType != ''">
+                AND mediaType = #{mediaType}
+            </if>
+        </where>
+        ORDER BY userAddTime DESC
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="getDuanziVOList" parameterType="java.util.HashMap" resultType="com.yf.sblocaldemo.controller.vo.DuanziVO">
+        SELECT dz.*, u.loginName, u.avatarImg
+        FROM sf.sf_duanzi dz
+        LEFT JOIN sf.user u on dz.userId = u.id
+        <where>
+            AND dz.status = 0
+            <if test="mediaType != null and mediaType != ''">
+                AND dz.mediaType = #{mediaType}
+            </if>
+            <if test="labelName != null and labelName != ''">
+                AND dz.labelName = #{labelName}
+            </if>
+            <if test="searchKey != null and searchKey != ''">
+                AND dz.content LIKE CONCAT('%','${searchKey}','%' )
+            </if>
+        </where>
+        ORDER BY dz.userAddTime DESC
+        limit #{offset}, #{limit}
+    </select>
+
+
+</mapper>

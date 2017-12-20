@@ -1,0 +1,60 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.yf'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('mysql:mysql-connector-java')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile("org.springframework.boot:spring-boot-devtools")
+
+    //mybatis
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0'
+    compile group: 'tk.mybatis', name: 'mapper-spring-boot-starter', version: '1.1.7' //mapper
+    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.1.3' //page plugin
+    // https://mvnrepository.com/artifact/tk.mybatis/mapper
+    compile group: 'tk.mybatis', name: 'mapper', version: '3.4.6'
+
+
+    compile 'com.alibaba:druid:1.0.11'
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.0'
+    // https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence
+    compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.1.1'
+
+    //common
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    compile 'com.google.guava:guava:19.0'
+
+
+    //swagger
+    compile "io.springfox:springfox-swagger2:2.6.1"
+    compile 'io.springfox:springfox-swagger-ui:2.6.1'
+    compile 'io.springfox:springfox-staticdocs:2.6.1'
+
+}
