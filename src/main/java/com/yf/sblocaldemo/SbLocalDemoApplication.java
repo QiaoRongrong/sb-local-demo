@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Slf4j
-@EnableWebMvc
 @SpringBootApplication
 @MapperScan(basePackages = "com.yf.sblocaldemo.mapper")
 public class SbLocalDemoApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
