@@ -45,3 +45,9 @@ https://github.com/abel533/MyBatis-Spring-Boot
 compile group: 'tk.mybatis', name: 'mapper-spring-boot-starter', version: '1.1.7' //mapper
 
 Add filter
+
+
+### Springboot + swagger2 2017-12-20
+springboot 1.5.9 
+swagger 2.7
+

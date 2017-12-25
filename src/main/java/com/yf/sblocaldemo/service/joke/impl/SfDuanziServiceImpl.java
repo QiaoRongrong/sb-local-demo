@@ -93,6 +93,13 @@ public class SfDuanziServiceImpl implements SfDuanziService {
         return chosenOne;
     }
 
+    @Override
+    public DuanziVO getDuanziVOById(Long id) {
+        DuanziVO duanziVO = sfDuanziMapper.getDuanziVOById(id);
+
+        return apply(duanziVO);
+    }
+
     // in 10 mins
     private Date generateRandomTime() {
         Date current = new Date();

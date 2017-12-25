@@ -43,7 +43,6 @@ dependencies {
 
     compile 'com.alibaba:druid:1.0.11'
     compile 'com.alibaba:druid-spring-boot-starter:1.1.0'
-    // https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.1.1'
 
     //common
@@ -53,8 +52,7 @@ dependencies {
 
 
     //swagger
-    compile "io.springfox:springfox-swagger2:2.6.1"
-    compile 'io.springfox:springfox-swagger-ui:2.6.1'
-    compile 'io.springfox:springfox-staticdocs:2.6.1'
+	compile 'io.springfox:springfox-swagger2:2.7.0'
+	compile 'io.springfox:springfox-swagger-ui:2.7.0'
 
 }

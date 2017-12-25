@@ -20,4 +20,5 @@ public interface SfDuanziService {
     SfDuanzi chooseRandomOne();
 
 
+    DuanziVO getDuanziVOById(Long dzId);
 }

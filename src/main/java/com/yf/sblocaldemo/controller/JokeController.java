@@ -6,7 +6,11 @@ import com.yf.sblocaldemo.common.BaseResponse;
 import com.yf.sblocaldemo.common.PageInfo;
 import com.yf.sblocaldemo.controller.vo.DuanziVO;
 import com.yf.sblocaldemo.controller.vo.JokeListVO;
+import com.yf.sblocaldemo.domain.joke.SfDuanzi;
 import com.yf.sblocaldemo.service.joke.SfDuanziService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +36,7 @@ public class JokeController {
     @Autowired
     private SfDuanziService sfDuanziService;
 
+    @ApiOperation(value="获取段子列表", notes="分页获取,并提供搜索支持")
     @RequestMapping(value = "dzlist", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity getDuanziList(
             @RequestParam(value = "labelId", required = false, defaultValue = "0") Integer labelId,
@@ -56,17 +61,37 @@ public class JokeController {
         return new ResponseEntity(baseResponse, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "根据Id获取段子", response = SfDuanzi.class, responseContainer = "")
+    @RequestMapping(value = "dz-content", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity getDuanziById(
+            @Pattern(regexp = "[0-9]+") @RequestParam(value = "dzId", defaultValue = "0") Long dzId) {
 
-//    @ApiOperation(value = "点赞", response = JokeVO.class, responseContainer = "List")
-//    @RequestMapping(value = "like", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ResponseEntity like(Long jokeId, Integer userId, String userOperateEnum) {
-//
-//        boolean result = sfDuanziService.like(jokeId, userId, userOperateEnum);
-//
-//        BaseResponse baseResponse = BaseResponse.buildSuccessResponse(result);
-//
-//        return new ResponseEntity(baseResponse, HttpStatus.OK);
-//    }
+        BaseResponse baseResponse;
+        if (dzId == 0) {
+            baseResponse = BaseResponse.buildResponse(1001, "参数为空", null);
+        } else {
+            DuanziVO vo = sfDuanziService.getDuanziVOById(dzId);
+            baseResponse = BaseResponse.buildSuccessResponse(vo);
+        }
+
+        return new ResponseEntity(baseResponse, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "点赞", response = DuanziVO.class, responseContainer = "List")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "jokeId", value = "段子ID", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "userOperateEnum", value = "用户操邹:{LIKE, UNLIKE, SHARE}", required = true, dataType = "String")
+    })
+    @RequestMapping(value = "like", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity like(Long jokeId, Integer userId, String userOperateEnum) {
+
+        boolean result = sfDuanziService.like(jokeId, userId, userOperateEnum);
+
+        BaseResponse baseResponse = BaseResponse.buildSuccessResponse(result);
+
+        return new ResponseEntity(baseResponse, HttpStatus.OK);
+    }
 
 
 }

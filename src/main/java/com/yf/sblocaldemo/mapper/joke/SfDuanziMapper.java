@@ -27,6 +27,7 @@ public interface SfDuanziMapper extends MyMapper<SfDuanzi> {
     List<SfDuanzi> getDuanziListByType(String type);
 
 
-
+    @Select("SELECT dz.*, u.loginName, u.avatarImg FROM sf.sf_duanzi dz LEFT JOIN sf.user u on dz.userId = u.id where dz.id = #{id}")
+    DuanziVO getDuanziVOById(Long id);
 
 }
