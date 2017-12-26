@@ -50,8 +50,11 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile 'com.google.guava:guava:19.0'
 
+	//No SQL
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.7.RELEASE' //redis
 
-    //swagger
+
+	//swagger
 	compile 'io.springfox:springfox-swagger2:2.7.0'
 	compile 'io.springfox:springfox-swagger-ui:2.7.0'
 

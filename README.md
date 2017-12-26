@@ -51,3 +51,7 @@ Add filter
 springboot 1.5.9 
 swagger 2.7
 
+### Springboot + redis 2017-12-26
+1. gradle: compile group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.7.RELEASE' 
+2. redis config on .properties file.
+

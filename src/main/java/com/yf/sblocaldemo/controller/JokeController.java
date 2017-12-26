@@ -12,7 +12,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,9 @@ public class JokeController {
 
     @Autowired
     private SfDuanziService sfDuanziService;
+
+//    @Autowired
+//    private StringRedisTemplate stringRedisTemplate;
 
     @ApiOperation(value="获取段子列表", notes="分页获取,并提供搜索支持")
     @RequestMapping(value = "dzlist", method = {RequestMethod.GET, RequestMethod.POST})
@@ -61,6 +66,8 @@ public class JokeController {
         return new ResponseEntity(baseResponse, HttpStatus.OK);
     }
 
+
+
     @ApiOperation(value = "根据Id获取段子", response = SfDuanzi.class, responseContainer = "")
     @RequestMapping(value = "dz-content", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity getDuanziById(
@@ -73,6 +80,16 @@ public class JokeController {
             DuanziVO vo = sfDuanziService.getDuanziVOById(dzId);
             baseResponse = BaseResponse.buildSuccessResponse(vo);
         }
+
+        //test the redis
+//        String key = "sf-redis-test-key";
+//        String value = stringRedisTemplate.opsForValue().get(key);
+//        if (StringUtils.isEmpty(value)) {
+//            log.info(" Redis test - put into ...");
+//            stringRedisTemplate.opsForValue().set(key, key + "- hello sb redis");
+//        } else {
+//            log.info(" Redis test - value is: {}", value);
+//        }
 
         return new ResponseEntity(baseResponse, HttpStatus.OK);
     }
